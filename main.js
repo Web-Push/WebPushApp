@@ -149,7 +149,7 @@ function subscribe() {
 }
 
 // Once the service worker is registered set the initial state
-function initialiseState() {
+function initialiseState(registration) {
   // Are Notifications supported in the service worker?
   if (!('showNotification' in ServiceWorkerRegistration.prototype)) {
     window.Demo.debug.log('Notifications aren\'t supported.');
@@ -170,10 +170,9 @@ function initialiseState() {
     return;
   }
 
-  // We need the service worker registration to check for a subscription
-  navigator.serviceWorker.ready.then(function(serviceWorkerRegistration) {
+
     // Do we already have a push message subscription?
-    serviceWorkerRegistration.pushManager.getSubscription()
+    registration.pushManager.getSubscription()
       .then(function(subscription) {
         // Enable any UI which subscribes / unsubscribes from
         // push messages.
@@ -197,7 +196,7 @@ function initialiseState() {
       .catch(function(err) {
         window.Demo.debug.log('Error during getSubscription()', err);
       });
-  });
+
 }
 
 window.addEventListener('load', function() {
@@ -217,7 +216,7 @@ window.addEventListener('load', function() {
       then(function(registration) {
     　   // 登録成功
     　   console.log('ServiceWorker registration successful with scope: ', registration.scope);
-    　   initialiseState();
+    　   initialiseState(registration);
       }).
       catch(function(err){
     　   console.log('ServiceWorker registration failed: ', err);
