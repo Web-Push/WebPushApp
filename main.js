@@ -213,8 +213,15 @@ window.addEventListener('load', function() {
   // Check that service workers are supported, if so, progressively
   // enhance and add push messaging support, otherwise continue without it.
   if ('serviceWorker' in navigator) {
-    navigator.serviceWorker.register('https://web-push.github.io/k_y_test/service-worker.js')
-    .then(initialiseState);
+    navigator.serviceWorker.register('https://web-push.github.io/k_y_test/service-worker.js').
+      then(function(registration) {
+    　   // 登録成功
+    　   console.log('ServiceWorker registration successful with scope: ', registration.scope);
+    　   initialiseState();
+      }).
+      catch(function(err){
+    　   console.log('ServiceWorker registration failed: ', err);
+  　   });
   } else {
     window.Demo.debug.log('Service workers aren\'t supported in this browser.');
   }
