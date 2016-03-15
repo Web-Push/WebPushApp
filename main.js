@@ -211,6 +211,7 @@ window.addEventListener('load', function() {
   });
   console.log('screen.width:'+ screen.width);
   console.log('screen.height:'+ screen.height);
+  console.log('ua:[' + window.navigator.userAgent.toLowerCase() +']');
     var _ua = (function(u){
       return {
         Tablet:(u.indexOf("windows") != -1 && u.indexOf("touch") != -1 && u.indexOf("tablet pc") == -1) 
