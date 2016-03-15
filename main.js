@@ -209,6 +209,8 @@ window.addEventListener('load', function() {
       subscribe();
     }
   });
+  console.log('screen.width:'+ screen.width);
+  console.log('screen.height:'+ screen.height);
 
   // Check that service workers are supported, if so, progressively
   // enhance and add push messaging support, otherwise continue without it.
